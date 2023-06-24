@@ -6,8 +6,6 @@ import {
   Put,
   Patch,
   Delete,
-  Param,
-  ParseIntPipe,
   NotFoundException,
   UseInterceptors,
 } from '@nestjs/common';
@@ -18,7 +16,7 @@ import { UserService } from './user.service';
 import { LogInterceptor } from 'src/interceptors/log.interceptor';
 import { ParamId } from 'src/decorators/param-id.decorator';
 
-UseInterceptors(LogInterceptor);
+@UseInterceptors(LogInterceptor)
 @Controller('users')
 export class UserController {
   constructor(private readonly userService: UserService) {}
