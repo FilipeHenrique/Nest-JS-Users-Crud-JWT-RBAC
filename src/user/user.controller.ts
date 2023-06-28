@@ -8,6 +8,7 @@ import {
   Delete,
   NotFoundException,
   UseInterceptors,
+  UseGuards,
 } from '@nestjs/common';
 import { CreateUserDTO } from './dto/create-user.dto';
 import { UpdatePutUserDto } from './dto/update-put-user.dto';
@@ -15,16 +16,21 @@ import { UpdatePatchUserDto } from './dto/update-patch-user.dto';
 import { UserService } from './user.service';
 import { LogInterceptor } from 'src/interceptors/log.interceptor';
 import { ParamId } from 'src/decorators/param-id.decorator';
+import { Roles } from 'src/decorators/role.decorator';
+import { Role } from 'src/enums/role.enums';
+import { RoleGuard } from 'src/guards/role.guard';
 import { AuthGuard } from 'src/guards/auth.guard';
 
+@Roles(Role.Admin)
+@UseGuards(AuthGuard, RoleGuard)
 @UseInterceptors(LogInterceptor)
 @Controller('users')
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
   @Post()
-  async create(@Body() { email, name, password, birthAt }: CreateUserDTO) {
-    return this.userService.create({ email, name, password, birthAt });
+  async create(@Body() data: CreateUserDTO) {
+    return this.userService.create(data);
   }
 
   @Get()
