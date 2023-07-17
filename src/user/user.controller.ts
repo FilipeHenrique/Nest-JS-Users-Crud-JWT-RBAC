@@ -14,12 +14,12 @@ import { CreateUserDTO } from './dto/create-user.dto';
 import { UpdatePutUserDto } from './dto/update-put-user.dto';
 import { UpdatePatchUserDto } from './dto/update-patch-user.dto';
 import { UserService } from './user.service';
-import { LogInterceptor } from 'src/interceptors/log.interceptor';
-import { ParamId } from 'src/decorators/param-id.decorator';
-import { Roles } from 'src/decorators/role.decorator';
-import { Role } from 'src/enums/role.enums';
-import { RoleGuard } from 'src/guards/role.guard';
-import { AuthGuard } from 'src/guards/auth.guard';
+import { RoleGuard } from '../guards/role.guard';
+import { AuthGuard } from '../guards/auth.guard';
+import { Role } from '../enums/role.enums';
+import { Roles } from '../decorators/role.decorator';
+import { LogInterceptor } from '../interceptors/log.interceptor';
+import { ParamId } from '../decorators/param-id.decorator';
 
 @Roles(Role.Admin)
 @UseGuards(AuthGuard, RoleGuard)

@@ -18,8 +18,8 @@ import { AuthRegisterDTO } from './dto/auth-register.dto';
 import { AuthService } from './auth.service';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { join } from 'path';
-import { AuthGuard } from 'src/guards/auth.guard';
-import { FileService } from 'src/file/file.service';
+import { AuthGuard } from '../guards/auth.guard';
+import { FileService } from '../file/file.service';
 
 @Controller('auth')
 export class AuthController {

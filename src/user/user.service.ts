@@ -33,7 +33,6 @@ export class UserService {
 
   async show(id: number) {
     await this.exists(id);
-
     return this.userRepository.findOneBy({ id });
   }
 
@@ -73,7 +72,7 @@ export class UserService {
       data.password = await bcrypt.hash(data.password, await bcrypt.genSalt());
     }
     if (birthAt) {
-      data.birthAt = new Date(birthAt);
+      data.birthAt = birthAt;
     }
 
     if (role) {
@@ -88,17 +87,20 @@ export class UserService {
   async delete(id: number) {
     await this.exists(id);
 
-    return this.userRepository.delete(id);
+    await this.userRepository.delete(id);
+
+    return true;
   }
 
   async exists(id: number) {
-    const exists = await this.userRepository.exist({
-      where: {
-        id,
-      },
-    });
-    if (!exists) {
-      throw new NotFoundException('User not found');
+    if (
+      !(await this.userRepository.exist({
+        where: {
+          id,
+        },
+      }))
+    ) {
+      throw new NotFoundException(`O usuário ${id} não existe.`);
     }
   }
 }
