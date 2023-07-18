@@ -25,9 +25,9 @@ export class AuthService {
     private userRepository: Repository<UserEntity>,
   ) {}
 
-  async createToken(user: UserEntity) {
+  createToken(user: UserEntity) {
     return {
-      accesToken: this.jwtService.sign(
+      accessToken: this.jwtService.sign(
         {
           sub: user.id,
           name: user.name,
@@ -112,6 +112,7 @@ export class AuthService {
   }
 
   async register(data: AuthRegisterDTO) {
+    delete data.role;
     const user = await this.userService.create(data);
     return this.createToken(user);
   }
