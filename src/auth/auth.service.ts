@@ -108,7 +108,7 @@ export class AuthService {
       },
     });
 
-    return true;
+    return { success: true };
   }
 
   async register(data: AuthRegisterDTO) {

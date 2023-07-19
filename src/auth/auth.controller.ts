@@ -17,7 +17,6 @@ import { AuthForgetDTO } from './dto/auth-forget.dto';
 import { AuthRegisterDTO } from './dto/auth-register.dto';
 import { AuthService } from './auth.service';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { join } from 'path';
 import { AuthGuard } from '../guards/auth.guard';
 import { FileService } from '../file/file.service';
 
@@ -71,9 +70,9 @@ export class AuthController {
     const filename = `photo${user.id}.png`;
     try {
       this.fileService.upload(photo, filename);
-      return { success: true };
     } catch (error) {
       throw new BadRequestException(error);
     }
+    return photo;
   }
 }

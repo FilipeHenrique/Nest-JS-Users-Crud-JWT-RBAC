@@ -6,7 +6,7 @@ import { join } from 'path';
 @Injectable()
 export class FileService {
   getDestinationPath() {
-    return join(__dirname, '..', '..', 'storage', 'photos');
+    return join(__dirname, '..', '..', '..', 'storage', 'photos');
   }
 
   async upload(file: Express.Multer.File, filename: string) {

@@ -8,7 +8,7 @@ import { accessToken } from '../../test/mocks/tokens/access-token.mock';
 import { jwtServiceMock } from '../../test/mocks/tokens/jwt-service.mock';
 import { jwtPayload } from '../../test/mocks/tokens/jwt-payload.mock';
 import { resetTokenMock } from '../../test/mocks/tokens/reset-token.mock';
-import { authRegisterDTO } from '../../test/mocks/auth-register-dto.mock';
+import { authRegisterDTO } from '../../test/mocks/auth/auth-register-dto.mock';
 
 describe('AuthService', () => {
   let authService: AuthService;
@@ -57,7 +57,7 @@ describe('AuthService', () => {
     test('forget method', async () => {
       const result = await authService.forget('joao@hcode.com.br');
 
-      expect(result).toEqual(true);
+      expect(result).toEqual({ success: true });
     });
 
     test('reset method', async () => {
